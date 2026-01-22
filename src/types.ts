@@ -57,6 +57,16 @@ export type SanityImageAttributeOverrideProps = {
  */
 export type SanityImageComponentProps = {
   preview?: string
+  /**
+   * The sizes attribute for responsive images. Defaults to "100vw".
+   * Helps the browser decide which image from srcSet to download.
+   */
+  sizes?: string
+  /**
+   * Whether to allow cropping of images. When false, forces "contain" mode
+   * to ensure images are never cropped. Defaults to true.
+   */
+  allowCropping?: boolean
 }
 
 /**

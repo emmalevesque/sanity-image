@@ -33,6 +33,10 @@ export const SanityImage = <T extends React.ElementType = "img">({
   // Image query string params
   queryParams,
 
+  // Component props
+  sizes,
+  allowCropping = true,
+
   // Any remaining props are passed through to the rendered component
   ...rest
 }: SanityImageProps<T>) => {
@@ -44,6 +48,11 @@ export const SanityImage = <T extends React.ElementType = "img">({
 
   baseUrl = baseUrl ?? `https://cdn.sanity.io/images/${projectId}/${dataset}/`
 
+  // Force contain mode if cropping is not allowed
+  if (!allowCropping) {
+    mode = "contain"
+  }
+
   const isSvg = id.endsWith("-svg")
 
   const ImageComponent =
@@ -52,6 +61,7 @@ export const SanityImage = <T extends React.ElementType = "img">({
   const componentProps: Record<string, unknown> = {
     alt: rest.alt ?? "",
     loading: rest.loading ?? "lazy",
+    sizes: sizes ?? "100vw",
     id: htmlId,
     ...rest,
   }

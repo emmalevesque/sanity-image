@@ -83,5 +83,9 @@
     "onlyBuiltDependencies": [
       "esbuild"
     ]
-  }
+  },
+  "workspaces": [
+    "src",
+    "packages/*"
+  ]
 }

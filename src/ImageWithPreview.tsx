@@ -42,9 +42,14 @@ export const ImageWithPreview = <T extends React.ElementType = "img">({
           style={{
             // Set the aspect ratio to match the full image
             aspectRatio: `${props.width} / ${props.height}`,
+            // Blur the preview for a better loading experience
+            filter: "blur(20px)",
+            // Scale slightly to hide blur edges
+            transform: "scale(1.1)",
             ...style,
           }}
           data-lqip
+          aria-hidden="true"
         />
       )}
       <Img
@@ -54,7 +59,10 @@ export const ImageWithPreview = <T extends React.ElementType = "img">({
         ref={ref}
         style={
           loaded
-            ? style
+            ? {
+                transition: "opacity 0.3s ease-in-out",
+                ...style,
+              }
             : {
                 ...baseStyles,
                 ...style,
